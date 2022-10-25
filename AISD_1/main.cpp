@@ -2,7 +2,7 @@
 #include <string>
 #include <ctime>
 #include "Vector.h"
-//123
+
 using namespace std;
 
 void cont(int i)
