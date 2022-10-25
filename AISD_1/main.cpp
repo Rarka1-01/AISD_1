@@ -112,7 +112,7 @@ void mainMenu()
 			for (auto i : a)
 				cout << i << " ";
 			cout << endl;
-			cont(a.Len());
+			cont(a.Len() + 2);
 			break;
 
 		case 3:
@@ -120,7 +120,7 @@ void mainMenu()
 			for (auto i = a.rbegin(); i != a.rend(); ++i)
 				cout << *i << " ";
 			cout << endl;
-			cont(a.Len());
+			cont(a.Len() + 2);
 			break;
 
 		case 4:
