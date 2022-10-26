@@ -74,6 +74,10 @@ void mainMenu()
 		}
 	} while (content);
 
+	auto iter = a.begin();
+	int forIt = 0;
+	int fm2 = 0;
+
 	t = 0;
 	do
 	{
@@ -92,7 +96,8 @@ void mainMenu()
 		cout << "11. Вставить элемент на позицию в векторе" << endl;
 		cout << "12. Удалить первый данный элемент в векторе" << endl;
 		cout << "13. Удалить элемент на позиции в векторе" << endl;
-		cout << "14. Выйти из программы" << endl;
+		cout << "14. Работать с итератором" << endl;
+		cout << "15. Выйти из программы" << endl;
 		cin >> t;
 		cin.clear();
 		cin.ignore(numeric_limits<streamsize>::max(), '\n');
@@ -102,40 +107,50 @@ void mainMenu()
 		switch (t)
 		{
 		case 1:
+		{
 			cout << "Текущий вектор: " << endl;
 			a.Print();
 			cont(a.GetCounView());
+		}
 			break;
 
 		case 2:
+		{
 			cout << "Текущий вектор: " << endl;
 			for (auto i : a)
 				cout << i << " ";
 			cout << endl;
 			cont(a.Len() + 2);
+		}
 			break;
 
 		case 3:
+		{
 			cout << "Текущий вектор: " << endl;
 			for (auto i = a.rbegin(); i != a.rend(); ++i)
 				cout << *i << " ";
 			cout << endl;
 			cont(a.Len() + 2);
+		}
 			break;
 
 		case 4:
+		{
 			cout << "Длинна вектора: " << a.Len() << endl;
 			cont(a.GetCounView());
+		}
 			break;
 
 		case 5:
+		{
 			a.Clear();
 			cout << "Вектор очищен!" << endl;
 			cont(a.GetCounView());
+		}
 			break;
 
 		case 6:
-
+		{
 			cout << "Введите элемент, который нужно проверить: ";
 			cin >> r;
 			system("cls");
@@ -147,11 +162,11 @@ void mainMenu()
 				cout << "Такого элемента нет.";
 			cout << endl;
 			cont(a.GetCounView());
-
+		}
 			break;
 
 		case 7:
-
+		{
 			if (a.Empty())
 				cout << "Вектор пустой, нечего выводить!" << endl;
 			else
@@ -176,11 +191,11 @@ void mainMenu()
 			}
 
 			cont(a.GetCounView());
-
+		}
 			break;
 
 		case 8:
-
+		{
 			if (a.Empty())
 				cout << "Вектор пустой, нечего изменять!" << endl;
 			else
@@ -212,10 +227,11 @@ void mainMenu()
 			}
 
 			cont(a.GetCounView());
-
+		}
 			break;
 
 		case 9:
+		{
 			tmp_con = 0;
 			if (a.Empty())
 				cout << "Вектор пуст, нечего искать!" << endl;
@@ -241,11 +257,11 @@ void mainMenu()
 			}
 
 			cont(tmp_con);
-
+		}
 			break;
 
 		case 10:
-
+		{
 			cout << "Введите элемент, который будем вставлять: ";
 			cin >> r;
 			cin.clear();
@@ -254,11 +270,11 @@ void mainMenu()
 			a.Push(r);
 			cout << "Элемен успешо вставлен!" << endl;
 			cont(a.GetCounView());
-
+		}
 			break;
 
 		case 11:
-
+		{
 			if (a.Empty())
 				cout << "Вектор пуст! Для вставки первого элемента воспользуйтесь пунктом 10." << endl;
 			else
@@ -289,11 +305,11 @@ void mainMenu()
 			}
 
 			cont(a.GetCounView());
-
+		}
 			break;
 
 		case 12:
-
+		{
 			cout << "Введите удаляемый элемент: ";
 			cin >> r;
 
@@ -303,10 +319,11 @@ void mainMenu()
 				cout << "Такого элемента не найдено!" << endl;
 
 			cont(a.GetCounView());
+		}
 			break;
 
 		case 13: 
-			
+		{
 			if (a.Empty())
 				cout << "Вектор пуст!" << endl;
 			else
@@ -333,15 +350,97 @@ void mainMenu()
 			}
 
 			cont(a.GetCounView());
-
+		}
 			break;
 
-		case 14: t = -1;
+		case 14:
+		{
+			fm2 = 0;
+			do
+			{
+				do
+				{
+					cout << "1. Итератор +1\n2. Иератор -1\n3. Разыменовать текущий итератор\n4. Установить итератор на позицию\n5. Установить итератор на начало\n6. Установить итератор на конец\n7. Вернуться в предыдущее меню" << endl;
+					cin >> r;
+					cin.clear();
+					cin.ignore(numeric_limits<streamsize>::max(), '\n');
+					system("cls");
+					if (r < 1 || r > 7)
+					{
+						system("cls");
+						cout << "Неверно введено значение, введите цифру от 1 до 6" << endl;
+					}
+				} while (r > 7 || r < 1);
+
+				try
+				{
+					switch (r)
+					{
+					case 1: {++iter; forIt++; cout << "Итератор инкрементирован." << endl; } break;
+					case 2: {--iter; forIt--; cout << "Итератор декриментирован." << endl; } break;
+					case 3: {
+						if (forIt < a.Len() && forIt > -1)
+							cout << "Разыменованный итератор: " << *iter << endl;
+						else
+							throw new exception("123");
+					} break;
+					case 4: {
+						cout << "Введите позицию от 1 до " << a.Len() << ": ";
+						do
+						{
+							cin >> r1;
+							cin.clear();
+							cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
+							if (r1 < 1 || r1 > a.Len())
+							{
+								system("cls");
+								cout << "Неверно введено значение, введите индекс от 1 до " << a.Len() << endl;
+							}
+
+						} while (r1 < 1 || r1 > a.Len());
+
+						iter = a.begin();
+						for (int i = 0; i < r1 - 1; i++)
+							++iter;
+
+						cout << "Итератор установлен!" << endl;
+
+					} break;
+					case 5: {
+						iter = a.begin(); 
+						forIt = 0; 
+						cout << "Итератор установлен на начало." << endl; 
+					} break;
+					case 6: {
+						iter = --(a.end()); 
+						forIt = a.Len() - 1;
+						cout << "Итератор установлен на конец." << endl; 
+					}break;
+					case 7: fm2 = -1; break;
+					}
+
+				}
+				catch (...)
+				{
+					cout << "Итератор не установлен." << endl;
+				}
+				cont(0);
+				system("cls");
+			} while (fm2 != -1);
+		}
+			break;
+
+		case 15:
+		{
+			t = -1;
 			exit(1);
+		}
 			break;
 
 		default:
-			cout << "Неверный ввод переменной, для продолжения нажмите Enter...\n";
+			cout << "Неверно введено значение пункта меню.";
+			cont(0);
 			
 			break;
 		}
