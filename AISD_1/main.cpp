@@ -336,7 +336,9 @@ void mainMenu()
 
 			break;
 
-		case 14: t = -1; break;
+		case 14: t = -1;
+			exit(1);
+			break;
 
 		default:
 			cout << "Неверный ввод переменной, для продолжения нажмите Enter...\n";

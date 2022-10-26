@@ -46,7 +46,7 @@ public:
 
 	void Clear()
 	{
-		this->cr = 2;
+		this->cr = 0;
 		this->len = 0;
 		delete this->array;
 		this->array = new T[this->maxLen];
@@ -119,18 +119,17 @@ public:
 
 	void Push(T El)
 	{
-		this->cr = 0;
+		this->cr = 1;
 		if (this->len == this->maxLen)
 			this->ReSize();
 
 		this->len++;
 		this->array[this->len - 1] = El;
-		this->cr++;
 	}
 
 	bool Insert(const int ind, const T El)
 	{
-		this->cr = 0;
+		this->cr = len - ind + 2; 
 		if (ind <= this->len && ind >= 0)
 		{
 			if (this->len == this->maxLen)
@@ -140,11 +139,9 @@ public:
 			for (int i = this->len; i > ind; i--)
 			{
 				this->array[i] = this->array[i - 1];
-				this->cr++;
 			}
 
 			this->array[ind] = El;
-			this->cr++;
 			return true;
 		}
 		else
